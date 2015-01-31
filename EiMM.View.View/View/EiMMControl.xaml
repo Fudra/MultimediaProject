@@ -32,12 +32,27 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <Path Style="{StaticResource CompanianCubeIcon}" />
+            <Path Grid.Column="0" Style="{StaticResource CompanianCubeIcon}" />
             <TextBlock Grid.Column="1" Style="{StaticResource TilteStle}">EiMM: OSC and OpenCV</TextBlock>
+            <Button x:Name="OpenCvButton"
+                    Grid.Column="3"
+                    Click="OpenCvButton_OnClick"
+                    Style="{StaticResource BasicButtonStyle}"
+                    ToolTip="OpenCV Settings">
+                <Path Style="{StaticResource CameraIcon}" />
+            </Button>
+            <Button x:Name="OscButton"
+                    Grid.Column="4"
+                    Click="OscButton_OnClick"
+                    Style="{StaticResource BasicButtonStyle}"
+                    ToolTip="OSC Settings">
+                <Path Style="{StaticResource WifiIcon}" />
+            </Button>
         </Grid>
 
         <!--  Ball Tracking Windows  -->
@@ -63,7 +78,7 @@
                     </Grid.RowDefinitions>
                     <StackPanel Orientation="Horizontal">
                         <Path Style="{StaticResource InfoIcon}" />
-                        <TextBlock Style="{StaticResource Heading1Style}">Orginal Image:</TextBlock>
+                        <TextBlock Style="{StaticResource Heading1Style}">Original Image:</TextBlock>
                     </StackPanel>
                     <Separator Grid.Row="1" Style="{StaticResource SeperatorStyle}" />
                 </Grid>
@@ -110,7 +125,6 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <!--  OpenCV Control Pannel  -->
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -118,150 +132,6 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-
-                <!--  header  -->
-                <Grid Grid.Row="0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <StackPanel Orientation="Horizontal">
-                        <Path Style="{StaticResource InfoIcon}" />
-                        <TextBlock Style="{StaticResource Heading1Style}">OpenCV Color Settings:</TextBlock>
-                    </StackPanel>
-                    <Separator Grid.Row="1" Style="{StaticResource SeperatorStyle}" />
-                </Grid>
-
-                <!--  Controls  -->
-                <Grid Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <!--  min Values  -->
-                    <Grid Grid.Column="0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="2*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                    Grid.Column="0"
-                                    Grid.ColumnSpan="2"
-                                    Orientation="Vertical">
-                            <TextBlock Style="{StaticResource Heading2Style}">Minimum Detection Values</TextBlock>
-                            <Separator Style="{StaticResource SeperatorStyle}" />
-                        </StackPanel>
-                        <!--  Min Red  -->
-                        <TextBlock Grid.Row="1"
-                                   Grid.Column="0"
-                                   Style="{StaticResource BaseStyle}"
-                                   Text="{Binding Setting.RgbColorMin.Red,
-                                                  StringFormat=R: {0:d},
-                                                  FallbackValue=R: 0,
-                                                  UpdateSourceTrigger=PropertyChanged}" />
-                        <Slider Grid.Row="1"
-                                Grid.Column="1"
-                                Style="{StaticResource SliderColorStyle}"
-                                Value="{Binding Setting.RgbColorMin.Red,
-                                                Mode=TwoWay}" />
-
-                        <!--  Min green  -->
-                        <TextBlock Grid.Row="2"
-                                   Grid.Column="0"
-                                   Style="{StaticResource BaseStyle}"
-                                   Text="{Binding Setting.RgbColorMin.Green,
-                                                  StringFormat=G: {0:d},
-                                                  FallbackValue=G: 0,
-                                                  UpdateSourceTrigger=PropertyChanged}" />
-                        <Slider Grid.Row="2"
-                                Grid.Column="1"
-                                Style="{StaticResource SliderColorStyle}"
-                                Value="{Binding Setting.RgbColorMin.Green,
-                                                Mode=TwoWay}" />
-
-                        <!--  Min Blue  -->
-                        <TextBlock Grid.Row="3"
-                                   Grid.Column="0"
-                                   Style="{StaticResource BaseStyle}"
-                                   Text="{Binding Setting.RgbColorMin.Blue,
-                                                  StringFormat=B: {0:d},
-                                                  FallbackValue=B: 0,
-                                                  UpdateSourceTrigger=PropertyChanged}" />
-                        <Slider Grid.Row="3"
-                                Grid.Column="1"
-                                Style="{StaticResource SliderColorStyle}"
-                                Value="{Binding Setting.RgbColorMin.Blue,
-                                                Mode=TwoWay}" />
-                    </Grid>
-
-                    <!--  max Values  -->
-                    <Grid Grid.Column="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="2*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                    Grid.Column="0"
-                                    Grid.ColumnSpan="2"
-                                    Orientation="Vertical">
-                            <TextBlock Style="{StaticResource Heading2Style}">Maximum Detection Values</TextBlock>
-                            <Separator Style="{StaticResource SeperatorStyle}" />
-                        </StackPanel>
-                        <!--  Max Red  -->
-                        <TextBlock Grid.Row="1"
-                                   Grid.Column="0"
-                                   Style="{StaticResource BaseStyle}"
-                                   Text="{Binding Setting.RgbColorMax.Red,
-                                                  StringFormat=R: {0:d},
-                                                  FallbackValue=R: 0,
-                                                  UpdateSourceTrigger=PropertyChanged}" />
-                        <Slider Grid.Row="1"
-                                Grid.Column="1"
-                                Style="{StaticResource SliderColorStyle}"
-                                Value="{Binding Setting.RgbColorMax.Red,
-                                                Mode=TwoWay}" />
-
-                        <!--  Max Green  -->
-                        <TextBlock Grid.Row="2"
-                                   Grid.Column="0"
-                                   Style="{StaticResource BaseStyle}"
-                                   Text="{Binding Setting.RgbColorMax.Green,
-                                                  StringFormat=G: {0:d},
-                                                  FallbackValue=G: 0,
-                                                  UpdateSourceTrigger=PropertyChanged}" />
-                        <Slider Grid.Row="2"
-                                Grid.Column="1"
-                                Style="{StaticResource SliderColorStyle}"
-                                Value="{Binding Setting.RgbColorMax.Green,
-                                                Mode=TwoWay}" />
-
-                        <!--  max Blue  -->
-                        <TextBlock Grid.Row="3"
-                                   Grid.Column="0"
-                                   Style="{StaticResource BaseStyle}"
-                                   Text="{Binding Setting.RgbColorMax.Blue,
-                                                  StringFormat=B: {0:d},
-                                                  FallbackValue=B: 0,
-                                                  UpdateSourceTrigger=PropertyChanged}" />
-                        <Slider Grid.Row="3"
-                                Grid.Column="1"
-                                Style="{StaticResource SliderColorStyle}"
-                                Value="{Binding Setting.RgbColorMax.Blue,
-                                                Mode=TwoWay}" />
-                    </Grid>
-                </Grid>
 
                 <!--  Header2  -->
                 <Grid Grid.Row="2">
@@ -285,7 +155,7 @@
 
                     <!--  Run / Stop  -->
                     <Grid Grid.Column="0">
-                        <ToggleButton Style="{StaticResource PlayPauseStyle}" IsChecked="{Binding Setting.IsCapture, Mode=TwoWay}">
+                        <ToggleButton IsChecked="{Binding Setting.IsCapture, Mode=TwoWay}" Style="{StaticResource PlayPauseStyle}">
                             <StackPanel Orientation="Horizontal">
                                 <Path Style="{StaticResource PlayIcon}" Visibility="{Binding RelativeSource={RelativeSource AncestorType=ToggleButton}, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}" />
                                 <Path Style="{StaticResource PauseIcon}" Visibility="{Binding RelativeSource={RelativeSource AncestorType=ToggleButton}, Path=IsChecked, Converter={StaticResource BooleanToCollapsedConverter}}" />
@@ -294,18 +164,21 @@
                     </Grid>
 
                     <StackPanel Grid.Column="1" Orientation="Vertical">
-                        <!--  Textarea  -->
+                        <!--  Textarea 
                         <TextBlock Style="{StaticResource BaseStyle}" Text="{Binding Setting.BallPosition, FallbackValue='Ball position : x = 0, y = 0, radius = 0'}" />
+                         -->
                         <!--  Textarea  -->
-                        <TextBlock Style="{StaticResource BaseStyle}"
-                                   Text="{Binding Setting.CollectDataOfObjects,
+                      
+                        
+                        <TextBlock  Style="{StaticResource BaseStyle}"
+                                   Text="{Binding Setting.TrackedObjects,
                                                   FallbackValue=Captured Balls: 0,
                                                   StringFormat='Captured Balls: {0:d}'}"
+                                   MinHeight="200"
                                    TextWrapping="Wrap" />
                     </StackPanel>
 
                 </Grid>
-
 
             </Grid>
 
@@ -325,7 +198,7 @@
                     </Grid.RowDefinitions>
                     <StackPanel Orientation="Horizontal">
                         <Path Style="{StaticResource InfoIcon}" />
-                        <TextBlock Style="{StaticResource Heading1Style}">OSC Global Settings:</TextBlock>
+                        <TextBlock Style="{StaticResource Heading1Style}">OSC Information:</TextBlock>
 
 
                     </StackPanel>

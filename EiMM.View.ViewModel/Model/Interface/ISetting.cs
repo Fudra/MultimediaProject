@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows.Media;
 
 namespace EiMM.ViewModel.Model.Interface
@@ -33,6 +34,8 @@ namespace EiMM.ViewModel.Model.Interface
         String BallPosition { get; set; }
 
         bool IsCapture { get; set; }
+
+        ObservableCollection<ITrackedObject> TrackedObjects { get; set; } 
 
         /*
          *  OSC Properties

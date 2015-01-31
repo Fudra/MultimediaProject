@@ -1,0 +1,118 @@
+﻿<UserControl x:Class="EiMM.View.View.OSCControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModel="clr-namespace:EiMM.ViewModel;assembly=EiMM.ViewModel"
+             DataContext="{Binding EimmControlViewModel,
+                                   Source={x:Static viewModel:ViewModelManager.Instance}}"
+             d:DesignHeight="1000"
+             d:DesignWidth="500"
+             mc:Ignorable="d">
+    <!--  Einbinden von Ressourcen  -->
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Ressources/Ressources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid Background="{StaticResource BackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!--  header  -->
+        <Grid Background="{StaticResource HeaderBackgroundBrush}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Path Style="{StaticResource SettingIcon}" />
+            <TextBlock Grid.Column="1" Style="{StaticResource TilteStle}">OSC Controls</TextBlock>
+        </Grid>
+        <!--  OSC Control Pannel  -->
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!--  header  -->
+            <Grid Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal">
+                    <Path Style="{StaticResource InfoIcon}" />
+                    <TextBlock Style="{StaticResource Heading1Style}">OSC Global Settings:</TextBlock>
+                </StackPanel>
+                <Separator Grid.Row="1" Style="{StaticResource SeperatorStyle}" />
+            </Grid>
+
+            <!--  Controls  -->
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <!--  min Values  -->
+                <Grid Grid.Column="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="70" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                Orientation="Vertical">
+                        <TextBlock Style="{StaticResource Heading2Style}">Some Values</TextBlock>
+                        <Separator Style="{StaticResource SeperatorStyle}" />
+                    </StackPanel>
+                    <!--  Content  -->
+                </Grid>
+
+                <!--  max Values  -->
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="70" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                Orientation="Vertical">
+                        <TextBlock Style="{StaticResource Heading2Style}">Some Other Values</TextBlock>
+                        <Separator Style="{StaticResource SeperatorStyle}" />
+                    </StackPanel>
+                    <!--  Content  -->
+
+                </Grid>
+            </Grid>
+
+
+        </Grid>
+    </Grid>
+</UserControl>
+

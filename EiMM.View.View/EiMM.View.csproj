@@ -76,6 +76,12 @@
     <Compile Include="View\EiMMControl.xaml.cs">
       <DependentUpon>EiMMControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\OpenCVControl.xaml.cs">
+      <DependentUpon>OpenCVControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\OSCControl.xaml.cs">
+      <DependentUpon>OSCControl.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -98,6 +104,14 @@
     <Page Include="View\EiMMControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\OpenCVControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\OSCControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

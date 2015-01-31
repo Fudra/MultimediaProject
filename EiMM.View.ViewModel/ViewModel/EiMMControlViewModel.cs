@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Net.Mime;
 using System.Windows.Input;
 using System.Windows.Threading;
+using EiMM.ViewModel.Model.Impl;
 using EiMM.ViewModel.Model.Interface;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
@@ -67,14 +68,23 @@ namespace EiMM.ViewModel.ViewModel
 
             // processed image
             var imgOriginal = _capture.RetrieveBgrFrame();
+            imgOriginal = imgOriginal.Flip(FLIP.HORIZONTAL);
+           
             var imgProcessed = imgOriginal.InRange(new Bgr(minColor.Blue, minColor.Green, minColor.Red), new Bgr(maxColor.Blue, maxColor.Green, maxColor.Red));
             imgProcessed = imgProcessed.SmoothGaussian(_setting.GaussianBlur);
-
-            var circles = imgProcessed.HoughCircles(new Gray(_setting.CannyThreashold), new Gray(_setting.AccumulatorThreashold), 2, imgProcessed.Height / 4, _setting.MinRadiusDetectedCircles, _setting.MaxRadiusDetectedCircles)[0];
+            var circles = imgProcessed.HoughCircles(new Gray(_setting.CannyThreashold), new Gray(_setting.AccumulatorThreashold), 2, imgProcessed.Height / 4f, _setting.MinRadiusDetectedCircles, _setting.MaxRadiusDetectedCircles)[0];
 
             _setting.CollectDataOfObjects = 0;
+            _setting.TrackedObjects.Clear();
             foreach (var circle in circles)
             {
+                var tb = new TrackedObject
+                {
+                    Id = _setting.CollectDataOfObjects,
+                    X = circle.Center.X,
+                    Y = circle.Center.Y,
+                    Radius = circle.Radius
+                };
                 _setting.BallPosition = "ball position : x = " + circle.Center.X.ToString().PadLeft(4) +
                                 ", y =" + circle.Center.Y.ToString().PadLeft(4) +
                                 ", radius = " + circle.Radius.ToString("###.000").PadLeft(7);
@@ -85,6 +95,12 @@ namespace EiMM.ViewModel.ViewModel
                     new MCvScalar(0, 255, 0), -1, LINE_TYPE.CV_AA, 0);
                 
                 imgOriginal.Draw(circle, new Bgr(Color.Red), 3);
+                _setting.TrackedObjects.Add(tb);
+            }
+
+            foreach (var to in _setting.TrackedObjects)
+            {
+                Debug.WriteLine(to.ToString());
             }
 
             // Set Image to Settings:

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows.Media;
 using EiMM.ViewModel.Helper;
 using EiMM.ViewModel.Model.Interface;
@@ -19,6 +20,7 @@ namespace EiMM.ViewModel.Model.Impl
         private string _ballPosition;
         private int _collectDataOfObjects;
         private bool _isCapture;
+        private ObservableCollection<ITrackedObject> _trackedObjects;
 
 
         public Setting()
@@ -33,6 +35,7 @@ namespace EiMM.ViewModel.Model.Impl
             _maxRadiusDetectedCircles = 100;
             _collectDataOfObjects = 0;
             _isCapture = false;
+            _trackedObjects = new ObservableCollection<ITrackedObject>();
 
             // OSC Settings
 
@@ -205,6 +208,20 @@ namespace EiMM.ViewModel.Model.Impl
                 _isCapture = value;
                 OnSettingChanged(new EventArgs());
                 OnPropertyChanged(() => IsCapture);
+            }
+        }
+
+        /// <summary>
+        /// TrackedObjects
+        /// </summary>
+        /// Observable ??
+        public ObservableCollection<ITrackedObject> TrackedObjects
+        {
+            get { return _trackedObjects; }
+            set
+            {
+                _trackedObjects = value;
+                OnPropertyChanged(()=>TrackedObjects);
             }
         }
 
