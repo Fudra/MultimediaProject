@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Windows.Media;
+using EiMM.ViewModel.Enums;
 using EiMM.ViewModel.Helper;
 using EiMM.ViewModel.Model.Interface;
 
@@ -21,6 +22,18 @@ namespace EiMM.ViewModel.Model.Impl
         private int _collectDataOfObjects;
         private bool _isCapture;
         private ObservableCollection<ITrackedObject> _trackedObjects;
+        private ITransmitter _transmitter;
+        private TransmissionMode _transmissionMode;
+        private int _port;
+        private String _ipAddress;
+        private bool _avgOnSleepTime;
+        private int _sleepTime;
+        private bool _useLoopback;
+        private int _transmissonCounter;
+        private bool _isOscSending;
+        private string _oscAddress;
+        private BindingOscValue _oscValue;
+        private ObservableCollection<IBindValue> _bindValues;
 
 
         public Setting()
@@ -38,7 +51,14 @@ namespace EiMM.ViewModel.Model.Impl
             _trackedObjects = new ObservableCollection<ITrackedObject>();
 
             // OSC Settings
-
+            _port = 5103;
+            _useLoopback = true;
+            _sleepTime = 250;
+            _avgOnSleepTime = true;
+            _ipAddress = "127.0.0.1";
+            _transmissionMode = TransmissionMode.Udp;
+            _isOscSending = false;
+            _bindValues = new ObservableCollection<IBindValue>();
         }
 
        
@@ -225,10 +245,159 @@ namespace EiMM.ViewModel.Model.Impl
             }
         }
 
+       
         #endregion
 
         #region OSC Controls
-        
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ITransmitter Transmitter
+        {
+            get { return _transmitter; }
+            set
+            {
+                _transmitter = value;
+                OnPropertyChanged(() => Transmitter);
+                OnSettingChanged(new EventArgs());
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public TransmissionMode TransmissionMode
+        {
+            get { return _transmissionMode; }
+            set
+            {
+                _transmissionMode = value;
+                OnPropertyChanged(() => TransmissionMode);
+                OnSettingChanged(new EventArgs());
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public int Port
+        {
+            get { return _port; }
+            set
+            {
+                _port = value;
+                OnPropertyChanged(() => Port);
+                OnSettingChanged(new EventArgs());
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public String IpAddress
+        {
+            get { return _ipAddress; }
+            set
+            {
+                _ipAddress = value;
+                OnPropertyChanged(() => IpAddress);
+                OnSettingChanged(new EventArgs());
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool AvgOnSleepTime
+        {
+            get { return _avgOnSleepTime; }
+            set
+            {
+                _avgOnSleepTime = value;
+                OnPropertyChanged(() => AvgOnSleepTime);
+                OnSettingChanged(new EventArgs());
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool UseLoopback
+        {
+            get { return _useLoopback; }
+            set
+            {
+                _useLoopback = value;
+                OnPropertyChanged(()=> UseLoopback);
+                OnSettingChanged(new EventArgs());
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public int SleepTime
+        {
+            get { return _sleepTime; }
+            set
+            {
+                _sleepTime = value;
+                OnPropertyChanged(()=> SleepTime);
+                OnSettingChanged(new EventArgs());
+            }
+        }
+
+        public int TransmissonCounter
+        {
+            get { return _transmissonCounter; }
+            set
+            {
+                _transmissonCounter = value;
+                OnPropertyChanged(()=> TransmissonCounter);
+            }
+        }
+
+        public bool IsOscSending
+        {
+            get { return _isOscSending; }
+            set
+            {
+                _isOscSending = value;
+                OnPropertyChanged(()=> IsOscSending);
+            }
+        }
+
+        public string OscAddress
+        {
+            get { return _oscAddress; }
+            set
+            {
+                _oscAddress = value;
+                OnPropertyChanged(()=> OscAddress);
+            }
+        }
+
+        public BindingOscValue OscValue
+        {
+            get { return _oscValue; }
+            set
+            {
+                _oscValue = value;
+                OnPropertyChanged(()=>OscValue);
+            }
+        }
+
+        public ObservableCollection<IBindValue> BindValues
+        {
+            get { return _bindValues; }
+            set
+            {
+                _bindValues = value;
+                OnPropertyChanged(()=>BindValues);
+            }
+        }
+
         #endregion
 
 

@@ -1,4 +1,6 @@
-﻿namespace EiMM.ViewModel.Model.Interface
+﻿using System.Runtime.InteropServices;
+
+namespace EiMM.ViewModel.Model.Interface
 {
     public interface ITrackedObject
     {

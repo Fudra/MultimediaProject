@@ -154,32 +154,43 @@
                     </Grid.ColumnDefinitions>
 
                     <!--  Run / Stop  -->
-                    <Grid Grid.Column="0">
-                        <ToggleButton IsChecked="{Binding Setting.IsCapture, Mode=TwoWay}" Style="{StaticResource PlayPauseStyle}">
-                            <StackPanel Orientation="Horizontal">
-                                <Path Style="{StaticResource PlayIcon}" Visibility="{Binding RelativeSource={RelativeSource AncestorType=ToggleButton}, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                                <Path Style="{StaticResource PauseIcon}" Visibility="{Binding RelativeSource={RelativeSource AncestorType=ToggleButton}, Path=IsChecked, Converter={StaticResource BooleanToCollapsedConverter}}" />
-                            </StackPanel>
-                        </ToggleButton>
-                    </Grid>
 
-                    <StackPanel Grid.Column="1" Orientation="Vertical">
-                        <!--  Textarea 
+                    <ToggleButton Grid.Column="0"
+                                  IsChecked="{Binding Setting.IsCapture,
+                                                      Mode=TwoWay}"
+                                  Style="{StaticResource PlayPauseStyle}">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Style="{StaticResource PlayIcon}" Visibility="{Binding RelativeSource={RelativeSource AncestorType=ToggleButton}, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                            <Path Style="{StaticResource PauseIcon}" Visibility="{Binding RelativeSource={RelativeSource AncestorType=ToggleButton}, Path=IsChecked, Converter={StaticResource BooleanToCollapsedConverter}}" />
+                        </StackPanel>
+                    </ToggleButton>
+
+                    <!--  Textarea
                         <TextBlock Style="{StaticResource BaseStyle}" Text="{Binding Setting.BallPosition, FallbackValue='Ball position : x = 0, y = 0, radius = 0'}" />
-                         -->
-                        <!--  Textarea  -->
-                      
-                        
+                    -->
+                    <!--  Textarea  -->
+
+                    <DataGrid Grid.Column="1"
+                              Width="200"
+                              MinHeight="150"
+                              AutoGenerateColumns="False"
+                              ItemsSource="{Binding Setting.TrackedObjects}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Id}" Header="Id" />
+                            <DataGridTextColumn Binding="{Binding X}" Header="X" />
+                            <DataGridTextColumn Binding="{Binding Y}" Header="Y" />
+                            <DataGridTextColumn Binding="{Binding Radius}" Header="Radius" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <!--
                         <TextBlock  Style="{StaticResource BaseStyle}"
                                    Text="{Binding Setting.TrackedObjects,
                                                   FallbackValue=Captured Balls: 0,
                                                   StringFormat='Captured Balls: {0:d}'}"
                                    MinHeight="200"
                                    TextWrapping="Wrap" />
-                    </StackPanel>
-
+                    -->
                 </Grid>
-
             </Grid>
 
             <!--  OSC Global Settings  -->
@@ -209,6 +220,43 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0"
+                               Grid.Column="0"
+                               Style="{StaticResource BaseStyle}">
+                        <TextBlock.Text>
+                            <MultiBinding FallbackValue="Network: 172.0.0.1:25" StringFormat="{}Network: {0} : {1}">
+                                <Binding Path="Setting.IpAddress" />
+                                <Binding Path="Setting.Port" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                    <TextBlock Grid.Row="0"
+                               Grid.Column="1"
+                               Style="{StaticResource BaseStyle}"
+                               Text="{Binding Setting.TransmissionMode,
+                                              FallbackValue='Transmission Mode: UDP',
+                                              StringFormat='{}Transmission Mode: {0}'}" />
+
+                    <TextBlock Grid.Row="1"
+                               Grid.Column="0"
+                               Style="{StaticResource BaseStyle}"
+                               Text="{Binding Setting.SleepTime,
+                                              FallbackValue='Sleep Time: 250 ms',
+                                              StringFormat='{}Sleep Time: {0} ms'}" />
+
+                    <TextBlock Grid.Row="1"
+                               Grid.Column="1"
+                               Style="{StaticResource BaseStyle}"
+                               Text="{Binding Setting.TransmissonCounter,
+                                              FallbackValue='Packets Send: 0',
+                                              StringFormat='{}Packets Send: {0}'}" />
                 </Grid>
             </Grid>
         </Grid>

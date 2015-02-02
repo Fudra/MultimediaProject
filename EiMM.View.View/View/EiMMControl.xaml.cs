@@ -36,7 +36,7 @@ namespace EiMM.View.View
                 Content = new OSCControl(),
                 SizeToContent = SizeToContent.Width,
                 Width = 400,
-                Height = 500
+                Height = 800
             };
 
             window.ShowDialog();

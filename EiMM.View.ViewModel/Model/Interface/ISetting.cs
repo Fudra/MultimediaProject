@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Windows.Media;
+using EiMM.ViewModel.Enums;
 
 namespace EiMM.ViewModel.Model.Interface
 {
@@ -41,6 +42,29 @@ namespace EiMM.ViewModel.Model.Interface
          *  OSC Properties
          */
 
+        ITransmitter Transmitter { get; set; }
+
+        TransmissionMode TransmissionMode { get; set; }
+
+        int Port { get; set; }
+
+        String IpAddress { get; set; }
+
+        bool AvgOnSleepTime { get; set; }
+
+        bool UseLoopback { get; set; }
+
+        int SleepTime { get; set; }
+
+        int TransmissonCounter { get; set; }
+
+        bool IsOscSending { get; set; }
+
+        String OscAddress { get; set; }
+
+        BindingOscValue OscValue { get; set; }
+
+        ObservableCollection<IBindValue> BindValues { get; set; } 
 
         /*
          *  Events

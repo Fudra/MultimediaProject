@@ -30,6 +30,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Bespoke.Common">
+      <HintPath>..\..\libs\OscFramework_2.0\Executables\Framework\x86\Bespoke.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Bespoke.Common.Osc">
+      <HintPath>..\..\libs\OscFramework_2.0\Executables\Framework\x86\Bespoke.Common.Osc.dll</HintPath>
+    </Reference>
     <Reference Include="Emgu.CV">
       <HintPath>..\..\libs\emgucv\bin\Emgu.CV.dll</HintPath>
     </Reference>
@@ -72,13 +78,21 @@
     <Compile Include="..\..\libs\emgucv\Emgu.CV.WPF\BitmapSourceConverter.cs">
       <Link>BitmapSourceConverter.cs</Link>
     </Compile>
+    <Compile Include="Enums\BindingOscValue.cs" />
+    <Compile Include="Enums\TransmissionMode.cs" />
     <Compile Include="Helper\ObjectNotifyPropertyChanged.cs" />
+    <Compile Include="Model\Impl\BindValue.cs" />
+    <Compile Include="Model\Impl\MulticastTransmitter.cs" />
     <Compile Include="Model\Impl\RGBColor.cs" />
     <Compile Include="Model\Impl\Setting.cs" />
+    <Compile Include="Model\Impl\TcpTransmitter.cs" />
     <Compile Include="Model\Impl\TrackedObject.cs" />
-    <Compile Include="Model\Interface\IRgbColor.cs" />
+    <Compile Include="Model\Impl\UdpTransmitter.cs" />
+    <Compile Include="IRgbColor.cs" />
+    <Compile Include="Model\Interface\IBindValue.cs" />
     <Compile Include="Model\Interface\ISetting.cs" />
     <Compile Include="Model\Interface\ITrackedObject.cs" />
+    <Compile Include="Model\Interface\ITransmitter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModelManager.cs" />
     <Compile Include="ViewModelModule.cs" />
